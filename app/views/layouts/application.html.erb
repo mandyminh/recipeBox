@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+  <title>Recipe App: Create and Share your recipe</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  
+  <nav class="navbar navbar-default">
+   
+    <div class="collapse navbar-collapse" id ="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-left">
+           <li class="navbar-brand">
+            <%= image_tag("recipe_boxlogo.jpg", :size => "80x60")%><%= link_to "Recipes Box: Create & Share Recipes", root_path %>
+            
+    <li>
+            <form class="navbar-form" role="search">
+                <div class="form-group">
+                     <input type="text" class="form-control" placeholder="Search Recipes Box">
+                </div>
+                     <button type="submit"  class="btn btn-lg btn-danger">Submit</button>
+            </form>
+
+    </li>
+            </li>
+    </div>
+    <div>   
+ <ul class="nav navbar-nav navbar-right">
+       <% if user_signed_in? %>
+              <li>
+                <%= link_to "New Recipe", new_recipe_path %>
+              </li>
+      <li>
+                <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      </li>
+           
+          <% else %>
+
+              <li>
+                <%= link_to "Sign Up", new_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to "Sign In", new_user_session_path %>
+              </li>
+
+          <% end %>
+        </div>
+  </ul>
+    
+
+  </nav>
+
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert" %>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+
+</body>
